@@ -19,6 +19,6 @@ export const Content = styled.div`
   margin-top: 2rem;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
