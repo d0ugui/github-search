@@ -11,7 +11,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/profile/:id" element={<Profile />}/>
+        <Route path="/profile/:user" element={<Profile />}/>
       </Routes>
     </BrowserRouter>
   )

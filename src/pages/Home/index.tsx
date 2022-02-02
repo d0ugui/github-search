@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 import { Input } from '../../components/Input';
@@ -17,9 +18,29 @@ export const Home: React.FC = () => {
   const [user, setUser] = useState<string>('');
   const [error, setError] = useState<IErrorsProps[]>([]);
 
+  const navigate = useNavigate();
+
   async function handleSearch() {
     const res = await api.get(user);
-    console.log(res.data);
+    
+    try {
+      if (res.status === 200) {
+        navigate(`/profile/${user}`);
+      };
+    } catch (error) {
+      console.log('Usuário não existe!');
+    }
+  }
+
+  function handleSubmit() {
+    if (user) {
+      handleSearch();
+    } else {
+      setError((prevState) => [
+        ...prevState,
+        { field: 'user', message: 'Nome é obrigatório!'},
+      ]);
+    }
   }
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -54,7 +75,7 @@ export const Home: React.FC = () => {
           placeholder="Digite o nome do usuário"
         />
        </FormGroup>
-        <Button onClick={handleSearch}>
+        <Button onClick={handleSubmit}>
           <FiSearch />
           Buscar
         </Button>
