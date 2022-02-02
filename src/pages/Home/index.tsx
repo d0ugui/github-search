@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
 
+import { FormGroup } from '../../components/FormGroup';
 import { Input } from '../../components/Input';
 import Button from '../../components/Button';
 
 import { FiSearch } from 'react-icons/fi';
 import { Container, Content } from './styles';
-import { FormGroup } from '../../components/FormGroup';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface IErrorsProps {
   field: string;
@@ -20,16 +22,18 @@ export const Home: React.FC = () => {
 
   const navigate = useNavigate();
 
+  function notifyUserDontExists() {
+    toast.error('User dont exists!', { theme: 'colored' });
+  }
+
   async function handleSearch() {
-    const res = await api.get(user);
-    
     try {
-      if (res.status === 200) {
-        navigate(`/profile/${user}`);
-      };
+      const res = await api.get(user);
+      navigate(`/profile/${user}`); 
     } catch (error) {
-      console.log('Usuário não existe!');
-    }
+      notifyUserDontExists();
+      console.log(error);
+    } 
   }
 
   function handleSubmit() {
@@ -79,6 +83,7 @@ export const Home: React.FC = () => {
           <FiSearch />
           Buscar
         </Button>
+        <ToastContainer />
       </Content>
     </Container>
   );
