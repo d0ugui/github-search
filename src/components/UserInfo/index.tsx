@@ -5,8 +5,8 @@ import api from '../../services/api';
 import { FiHome, FiHeart, FiStar, FiTwitter, FiMessageCircle, FiLink, FiMapPin, FiSun } from 'react-icons/fi';
 import { Container, Content, Stats } from './styles';
 
-interface UserInfoProps {
-  name: string;
+type UserInfoProps = {
+  name?: string;
 }
 
 type IUsernameData = {
@@ -37,7 +37,7 @@ const usernameInitialValues = {
   twitter_username: ''
 }
 
-export const UserInfo: React.FC<UserInfoProps> = ({ name }) => {
+export const UserInfo: React.FC<UserInfoProps> = ({ name = '' }) => {
   const [username, setUsername] = useState<IUsernameData>(usernameInitialValues);
   const navigate = useNavigate();
 
@@ -57,9 +57,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({ name }) => {
         <h2>{username.name}</h2>
         <h3>@{username.login}</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Sed tincidunt congue ligula in rutrum. Morbi nec lacus condimentum, 
-          hendrerit mi eu, feugiat.
+          {username.bio}
         </p>
 
         <Stats>

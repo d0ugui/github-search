@@ -44,6 +44,7 @@ export const Home: React.FC = () => {
         ...prevState,
         { field: 'user', message: 'Nome é obrigatório!'},
       ]);
+      toast.error('Name is required!', { theme: 'colored' });
     }
   }
 
