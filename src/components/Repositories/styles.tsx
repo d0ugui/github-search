@@ -8,6 +8,10 @@ export const Container = styled.div`
   overflow-y: scroll;
   height: 100%;
 
+  & > div {
+    width: 100%;
+  }
+
   ul {
     list-style: none;
     width: 100%;

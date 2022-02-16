@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { FiGithub } from 'react-icons/fi';
 import api from '../../services/api';
 
 import { FormGroup } from '../../components/FormGroup';
@@ -70,6 +71,7 @@ export const Home: React.FC = () => {
 
   return (
     <Container>
+      <FiGithub size={72}/>
       <h1>Search Devs!</h1>
       <Content>
        <FormGroup error={getErrorMessageByFieldName('user')}>
