@@ -1,73 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
+import { IUsernameData } from '../../pages/Profile';
 
 import { FiHome, FiHeart, FiStar, FiTwitter, FiMessageCircle, FiLink, FiMapPin, FiSun } from 'react-icons/fi';
 import { Container, Content, Stats } from './styles';
 
-type UserInfoProps = {
-  name?: string;
+interface UserInfoData {
+  data: IUsernameData;
 }
 
-type IUsernameData = {
-  avatar_url: string;
-  bio: string;
-  blog: string;
-  company: string;
-  email: string;
-  followers: number;
-  following: number;
-  location: string;
-  login: string;
-  name: string;
-  twitter_username: string;
-};
-
-const usernameInitialValues = {
-  avatar_url: '',
-  bio: '',
-  blog: '',
-  company: '',
-  email: '',
-  followers: 0,
-  following: 0,
-  location: '',
-  login: '',
-  name: '',
-  twitter_username: ''
-}
-
-export const UserInfo: React.FC<UserInfoProps> = ({ name = '' }) => {
-  const [username, setUsername] = useState<IUsernameData>(usernameInitialValues);
+export const UserInfo: React.FC<UserInfoData> = ({ data }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function getData() {
-      const res = await api.get(name);
-      setUsername(res.data);
-    }
-
-    getData();
-  }, []);
 
   return (
     <Container>
-      <img src={username.avatar_url} alt="" />
+      <img src={data.avatar_url} alt="" />
       <Content>
-        <h2>{username.name}</h2>
-        <h3>@{username.login}</h3>
+        <h2>{data.name}</h2>
+        <h3>@{data.login}</h3>
         <p>
-          {username.bio}
+          {data.bio}
         </p>
 
         <Stats>
           <div>
             <FiHome size={24}/>
-            {username.followers} followers
+            {data.followers} followers
           </div>
           <div>
             <FiHeart size={24}/>
-            {username.following} following
+            {data.following} following
           </div>
           <div>
             <FiStar size={24}/>
@@ -78,23 +40,23 @@ export const UserInfo: React.FC<UserInfoProps> = ({ name = '' }) => {
         <ul>
           <li>
             <FiMapPin />
-            {username.company || '--'}
+            {data.company || '--'}
           </li>
           <li>
             <FiSun />
-            {username.location || '--'}
+            {data.location || '--'}
           </li>
           <li>
             <FiMessageCircle />
-            {username.email|| '--'}
+            {data.email|| '--'}
           </li>
           <li>
             <FiLink />
-            {username.blog || '--'}
+            {data.blog || '--'}
           </li>
           <li>
             <FiTwitter />
-            {username.twitter_username || '--'}
+            {data.twitter_username || '--'}
           </li>
         </ul>
       </Content>
