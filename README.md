@@ -1,4 +1,4 @@
-<img align="center" src="src/assets/tela.png" alt="GitHub Search">
+<img align="center" src="src/assets/tela.gif" alt="GitHub Search">
 
 ## 📖 Projeto
 
