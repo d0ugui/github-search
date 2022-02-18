@@ -1,5 +1,4 @@
 import React from 'react';
-import { IRepositoriesModel } from '../../pages/Profile';
 
 import { FiStar } from 'react-icons/fi';
 import { Container } from './styles';

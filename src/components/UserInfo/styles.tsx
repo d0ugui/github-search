@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 35%;
+  width: 40%;
   height: 100%;
   background: #3B4252;
 
@@ -76,8 +76,11 @@ export const Stats = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   color: #8190A5;
+
+  div + div {
+    margin-left: 15px;
+  }
 
   & > div {
     display: flex;

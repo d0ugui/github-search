@@ -31,10 +31,6 @@ export const UserInfo: React.FC<UserInfoData> = ({ data }) => {
             <FiHeart size={24}/>
             {data.following} following
           </div>
-          <div>
-            <FiStar size={24}/>
-            5 starts
-          </div>
         </Stats>
 
         <ul>

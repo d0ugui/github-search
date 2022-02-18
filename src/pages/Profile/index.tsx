@@ -4,6 +4,7 @@ import api from '../../services/api';
 
 import { UserInfo } from '../../components/UserInfo';
 import { Repositories } from '../../components/Repositories';
+import { Loader } from '../../components/Loader';
 
 import { Container } from './styles';
 
@@ -58,25 +59,24 @@ const repoInitialValues = {
 export const Profile: React.FC = () => {
   const [username, setUsername] = useState<IUsernameData>(usernameInitialValues);
   const [repos, setRepos] = useState<[IRepositoriesModel]>([repoInitialValues]);
+  const [isLoading, setIsLoading] = useState(true);
   const { user = '' } = useParams<UserProps>();
 
   useEffect(() => {
     async function getData() {
       const res = await api.get(user);
+      const repos = await api.get(`${user}/repos`);
       setUsername(res.data);
+      setRepos(repos.data);
+      setIsLoading(false);
     }
 
-    async function getRepos() {
-      const res = await api.get(`${user}/repos`);
-      setRepos(res.data);
-    }
-
-    getRepos();
     getData();
   }, [])
 
   return (
     <Container>
+      { isLoading && <Loader />}
       <UserInfo data={username} />
       <Repositories data={repos} />
     </Container>
